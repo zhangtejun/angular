@@ -1,0 +1,40 @@
+<h2>{{title}}</h2>
+<h2>My Heroes</h2>
+<div>
+    <div style="width: 50%;float: left;">
+	    <ul class="heroes">
+	      <li *ngFor="let hero of heroes"
+	        [class.selected]="hero === selectedHero"
+	        (click)="onSelect(hero)">
+	        <span class="badge">{{hero.id}}</span> {{hero.name}}
+			
+			<button class="delete"
+				(click)="delete(hero); $event.stopPropagation()">x</button>
+
+	      </li>
+	    </ul>
+	</div>
+	<div style="float: left;">
+		<div *ngIf="selectedHero">
+		  <h3 *ngIf="selectedHero.name == '渣渣'||selectedHero.name == '呆呆'">
+			{{ selectedHero.name | uppercase}} is weak.
+		  </h3>
+		  <h3 *ngIf="selectedHero.name != '渣渣'&&selectedHero.name != '呆呆'">
+			{{selectedHero.name | uppercase}} is my hero.
+		  </h3>
+		  <button (click)="gotoDetail()">View Details</button>
+		</div>
+		<div *ngIf="!selectedHero">
+		  <p style="color: #039be5;">Click on the left of the list to view details</p>
+		</div>
+
+	    <!--<hero-detail [hero]="selectedHero"></hero-detail> -->
+		<div class="sp-row"></div>
+		<div style="width: 50%" class="margin-div">
+		  <label>Hero name:</label> <input #heroName />
+		  <button (click)="add(heroName.value); heroName.value=''">
+			Add
+		  </button>
+	    </div>
+    </div>
+</div>
